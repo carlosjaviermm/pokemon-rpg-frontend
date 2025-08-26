@@ -1,7 +1,9 @@
 import './LandingPage.css'
 import {Box, Button} from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 function LandingPage (){
+  const navigate = useNavigate()
   return (
     <Box
       sx={{
@@ -20,26 +22,27 @@ function LandingPage (){
         }}>
       <img className="logo-image" alt="Logo image" src="https://img.itch.zone/aW1nLzI5MDAzOTMucG5n/original/oWgoJ5.png" />
 
-      <Box sx={{display:"flex",
-                gap:"80px",
-                marginTop:'30px'
-      }}>
-      <Button variant="contained" 
-              sx={{bgcolor:'#EE3B40',
-                    padding:'15px 60px',
-                    borderRadius:'15px'
-              }}>
-        Sign up
-      </Button>
-      <Button variant="contained"
-              sx={{bgcolor:'#2C2C2C',
-                  padding:'15px 60px',
-                  borderRadius:'15px'
-              }}>
-        Log in
-      </Button>
-      </Box>
-
+        <Box sx={{display:"flex",
+                  gap:"80px",
+                  marginTop:'30px'
+        }}>
+          <Button variant="contained" 
+                  sx={{bgcolor:'#EE3B40',
+                        padding:'15px 60px',
+                        borderRadius:'15px'
+                  }}
+                  onClick={() => navigate('/signup')}>
+            Sign up
+          </Button>
+          <Button variant="contained"
+                  sx={{bgcolor:'#2C2C2C',
+                      padding:'15px 60px',
+                      borderRadius:'15px'
+                  }}
+                  onClick={() => navigate('/login')}>
+            Log in
+          </Button>
+        </Box>
       </Box>
     </Box>
   )
