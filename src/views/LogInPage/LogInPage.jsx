@@ -49,6 +49,7 @@ function LogInPage () {
           />
 
           <Button variant="contained"
+                  onClick={() => navigate('/starterselection')}
                   sx={{bgcolor:'#2C2C2C',
                       padding:'10px 110px',
                       borderRadius:'10px',
