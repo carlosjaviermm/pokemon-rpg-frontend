@@ -58,7 +58,7 @@ function LogInPage () {
         </Box>
         <Box>
 
-        <p>You dont't have an account? Go back to the:</p>
+        <p>You don't have an account? Go back to the:</p>
 
         <Button variant="contained"
                 onClick={() => navigate('/')}
