@@ -15,7 +15,7 @@ function ShopCard ({pokemon}) {
         gap: 1
       }}
     >
-      <img src={pokemon.img} alt={pokemon.name} width={96} height={96} />
+      <img src={pokemon.img} alt={pokemon.name} width={90} height={90} />
       
       <Button
         variant="contained"
