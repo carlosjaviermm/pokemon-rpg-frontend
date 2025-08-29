@@ -5,6 +5,7 @@ import LogInPage from "./views/LogInPage/LogInPage.jsx"
 import SignUpPage from "./views/SignUpPage/SignUpPage.jsx"
 import StarterSelection from './views/StarterSelection/StarterSelection.jsx'
 import MainHub from './views/MainHub/MainHub.jsx'
+import Shop from './views/Shop/Shop.jsx'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
               <Route path="/login" element={<LogInPage />} />
               <Route path='/starterselection' element={<StarterSelection />} />
               <Route path='/mainhub' element={<MainHub />} />
+              <Route path='/shop' element={<Shop />} />
             </Routes>
           </Router>
     </main>

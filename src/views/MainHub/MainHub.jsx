@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
 function MainHub () {
+  const navigate = useNavigate()
   return(
     <section className='main-hub'>
     <Box component='header'
@@ -18,6 +19,7 @@ function MainHub () {
         <img className='money-bag-icon' alt='money bag icon' src='https://cdn-icons-png.flaticon.com/512/188/188947.png'/>
 
         <Button variant='contained'
+                onClick={() => navigate('/shop')}
                 sx={{borderRadius:'15px', 
                      fontSize:'0.7rem',
                      marginRight:'90px'}}>Go to shop
@@ -37,14 +39,18 @@ function MainHub () {
               padding:'0 20px',
               marginTop:'10px'
     }}>
+
       <span style={{color:'black'}}>account: tucorreo@mail.com</span>
+
       <Button variant='contained'
+              onClick={() => navigate('/')}
               sx={{borderRadius:'17px',
                    fontSize:'0.70rem',
                    bgcolor:'#ec1c23ff'
               }}>
         Log out
       </Button>
+
     </Box>
 
     </section>
