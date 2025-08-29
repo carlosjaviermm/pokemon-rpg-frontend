@@ -10,3 +10,8 @@
   width: 944px;
   height: 708px;
 }
+
+ body{
+  display:flex;
+  justify-content:center;
+ }
