@@ -5,6 +5,7 @@ function HealthBar () {
   return(
   <LinearProgress
     variant="determinate"
+    value='100'
     sx={{
       height: 20,
       borderRadius: "5px",
