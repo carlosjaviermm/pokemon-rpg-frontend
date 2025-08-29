@@ -1,10 +1,11 @@
 import './MainHub.css'
-import {Box, Button} from '@mui/material'
+import {Box, Button, LinearProgress} from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
 function MainHub () {
   const navigate = useNavigate()
+  
   return(
     <section className='main-hub'>
     <Box component='header'
@@ -50,6 +51,63 @@ function MainHub () {
               }}>
         Log out
       </Button>
+
+    </Box>
+
+    <Box sx={{display:'flex', 
+              alignItems:'center', 
+              justifyContent:'center',
+              gap:'20px'}}>
+
+      <img className='red-sprite' alt='red sprite' src='public/red-sprite.webp' />
+
+      <span style={{color:'black', fontSize:'1.5rem'}}>Your team:</span>
+
+      <Box>
+        <img className='team-sprite' src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png' />
+         <LinearProgress
+        variant="determinate"
+        sx={{
+          height: 20,
+          borderRadius: "5px",
+          "& .MuiLinearProgress-bar": {
+            bgcolor:"green"}
+        }}/>
+      </Box>
+      <Box>
+        <img className='team-sprite' src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/253.png' />
+         <LinearProgress
+        variant="determinate"
+        sx={{
+          height: 20,
+          borderRadius: "5px",
+          "& .MuiLinearProgress-bar": {
+            bgcolor:"green"}
+        }}/>
+      </Box>
+      <Box>
+        <img className='team-sprite' src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png' />
+         <LinearProgress
+        variant="determinate"
+        sx={{
+          height: 20,
+          borderRadius: "5px",
+          "& .MuiLinearProgress-bar": {
+            bgcolor:"green"}
+        }}/>
+      </Box>
+
+      <Box>
+        <img className='team-sprite' src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/643.png' />
+         <LinearProgress
+        variant="determinate"
+        sx={{
+          height: 20,
+          borderRadius: "5px",
+          "& .MuiLinearProgress-bar": {
+            bgcolor:"green"}
+        }}/>
+      </Box>
 
     </Box>
 
