@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import './StarterSelection.css'
 
 function StarterSelection () {
+  const navigate = useNavigate()
 
   const [showStarters, setShowStarters] = useState (false)
   const [starters, setStarters] = useState ([])
@@ -40,7 +41,7 @@ function StarterSelection () {
     return(<Box sx={{display:'flex', flexDirection:'column', alignItems:'center'}}>
             <h2>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h2>
             <img className="starter-sprites" src={pokemon.img} alt={pokemon.name} key={pokemon.name} />
-            <Button variant="contained">
+            <Button variant="contained" onClick={() => navigate('/mainhub')}>
               Select
             </Button>
           </Box>)
