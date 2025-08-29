@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 
 function MainHub () {
   return(
+    <section className='main-hub'>
     <Box component='header'
           sx={{
             width: "944px",
@@ -17,8 +18,8 @@ function MainHub () {
         <img className='money-bag-icon' alt='money bag icon' src='https://cdn-icons-png.flaticon.com/512/188/188947.png'/>
 
         <Button variant='contained'
-                sx={{borderRadius:'20px', 
-                     fontSize:'0.75rem',
+                sx={{borderRadius:'15px', 
+                     fontSize:'0.7rem',
                      marginRight:'90px'}}>Go to shop
         </Button>
 
@@ -30,6 +31,23 @@ function MainHub () {
 
         <h3 style={{fontSize:'1.5rem'}}>$20</h3>
     </Box>
+
+    <Box sx={{display:'flex',
+              justifyContent:'space-between',
+              padding:'0 20px',
+              marginTop:'10px'
+    }}>
+      <span style={{color:'black'}}>account: tucorreo@mail.com</span>
+      <Button variant='contained'
+              sx={{borderRadius:'17px',
+                   fontSize:'0.70rem',
+                   bgcolor:'#ec1c23ff'
+              }}>
+        Log out
+      </Button>
+    </Box>
+
+    </section>
   )
 }
 
