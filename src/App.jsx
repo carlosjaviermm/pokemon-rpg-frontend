@@ -6,6 +6,9 @@ import SignUpPage from "./views/SignUpPage/SignUpPage.jsx"
 import StarterSelection from './views/StarterSelection/StarterSelection.jsx'
 import MainHub from './views/MainHub/MainHub.jsx'
 import Shop from './views/Shop/Shop.jsx'
+import LevelPichu from './views/levels/LevelPichu/LevelPichu.jsx'
+import LevelJirachi from './views/levels/LevelJirachi/LevelJirachi.jsx'
+import LevelCharcadet from './views/levels/LevelCharcadet/LevelCharcadet.jsx'
 
 function App() {
 
@@ -19,6 +22,9 @@ function App() {
               <Route path='/starterselection' element={<StarterSelection />} />
               <Route path='/mainhub' element={<MainHub />} />
               <Route path='/shop' element={<Shop />} />
+              <Route path='/levelpichu' element={<LevelPichu />} />
+              <Route path='/leveljirachi' element={<LevelJirachi />} />
+              <Route path='/levelcharcadet' element={<LevelCharcadet />} />
             </Routes>
           </Router>
     </main>
