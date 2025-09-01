@@ -1,18 +1,17 @@
 import { useParams } from "react-router-dom";
-
+import './Level.css';
 function Level() {
   const { id } = useParams(); 
   const level = parseInt(id, 10);
-  const enemySprite = 'https://www.vhv.rs/dpng/d/498-4988462_pokemon-sprite-trainer-png-transparent-pokemon-trainer-sprite.png'
 
   // Definir niveles
   const levels = {
-    1: { enemyTrainer: '/youngster-joey.webp',
+    1: { enemyTrainer: '/bug-catcher.png',
          enemyPokemon: "pichu", 
          playerPokemon: "charmander",
          pokedexNumber: '172' },
 
-    2: { enemyTrainer: '/bug-catcher.png', 
+    2: { enemyTrainer: '/youngster-joey.webp', 
          enemyPokemon: "jirachi", 
          playerPokemon: "charmander",
          pokedexNumber: '385' },
@@ -27,22 +26,22 @@ function Level() {
          playerPokemon: "charmander",
          pokedexNumber: '256' },
 
-    5: { enemyTrainer: '/trainer-5.png', 
+    5: { enemyTrainer: '/trainer-6.png', 
          enemyPokemon: "haunter", 
          playerPokemon: "charmander",
          pokedexNumber: '93' },
 
-    6: { enemyTrainer: '/trainer-6.png', 
+    6: { enemyTrainer: '/trainer-4.png', 
          enemyPokemon: "kingambit", 
          playerPokemon: "charmander",
          pokedexNumber: '983' },
 
-    7: { enemyTrainer: enemySprite, 
+    7: { enemyTrainer: '/trainer-5.png', 
          enemyPokemon: "annihilape", 
          playerPokemon: "charmander",
          pokedexNumber: '979' },
-
-    8: { enemyTrainer: enemySprite, 
+ 
+    8: { enemyTrainer: '/trainer-5.png', 
          enemyPokemon: "lugia", 
          playerPokemon: "charmander",
          pokedexNumber: '249' }
@@ -53,7 +52,7 @@ function Level() {
   return (
     <div>
       <h1>Level {level}</h1>
-      <img src={data.enemyTrainer} alt="Enemy Trainer" />
+      <img src={data.enemyTrainer} className='enemy-trainer' alt="Enemy Trainer" />
       <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.pokedexNumber}.png`} alt="Enemy Pokémon" />
       <h2>Your Pokémon: {data.playerPokemon}</h2>
     </div>
