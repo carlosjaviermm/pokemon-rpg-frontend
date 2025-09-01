@@ -8,6 +8,7 @@ function HealthBar () {
     value='100'
     sx={{
       height: 20,
+      maxWidth:'250px',
       borderRadius: "5px",
       "& .MuiLinearProgress-bar": {
         bgcolor:"green"}
