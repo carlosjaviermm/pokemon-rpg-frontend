@@ -65,22 +65,31 @@ function Level() {
           sx={{display:'flex',
                justifyContent:'flex-end',
           }}>
-          <Box sx={{bgcolor:'white', color:'black', height:'80px', width:'400px'}} > {data.enemyPokemon} <HealthBar />
+
+          <Box sx={{padding:'0 20px', display:'grid', bgcolor:'white', color:'black', height:'80px', width:'360px'}} > { data.enemyPokemon.charAt(0).toUpperCase() + data.enemyPokemon.slice(1) } <HealthBar />
           </Box>
+
           <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.pokedexNumber}.png`} alt="Enemy Pokémon" className='enemy-pokemon' />
+
           <img src={data.enemyTrainer} className='enemy-trainer' alt="Enemy Trainer" />
+
      </Box>
 
      <Box className='player-side'
           sx={{display:'flex',
                justifyContent:'flex-start'
           }}>
+
           <img className='player-trainer' src='/player-trainer.png' />
+
           <img src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/4.png"} alt="Player Pokémon" className='player-pokemon' />
+
           <Box sx={{display:'flex', flexDirection:'column', gap:'20px'}}>
-               <Box sx={{bgcolor:'white', color:'black', height:'80px', width:'400px'
-               }} > {data.playerPokemon} <HealthBar />
+
+               <Box sx={{padding:'0 20px', display:'grid', bgcolor:'white', color:'black', height:'80px', maxWidth:'400px'
+               }} > { data.playerPokemon.charAt(0).toUpperCase() + data.playerPokemon.slice(1) } <HealthBar />
                </Box>
+
                <Box sx={{display:'flex', flexDirection:'column', alignItems:'center',justifyContent:'center', bgcolor:'white', color:'black', height:'150px', width:'400px'
                }} > 
                     <Box sx={{display:'flex', gap:'70px',}}>
