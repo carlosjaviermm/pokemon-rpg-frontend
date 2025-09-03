@@ -1,8 +1,46 @@
 import {Box, Button, TextField} from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import {useState} from 'react'
 
 function SignUpPage () {
     const navigate = useNavigate()
+
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+
+    const handleSubmit = async () => {
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await fetch("http:///localhost:3001/api/users/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log("Usuario creado:", data);
+        alert("Usuario registrado con éxito ✅");
+        navigate("/"); // redirigir al main menu
+      } else {
+        console.error("Error:", data);
+        alert(`Error: ${data.message || "No se pudo registrar"}`);
+      }
+    } catch (error) {
+      console.error("Error de conexión:", error);
+      alert("No se pudo conectar con el servidor ❌");
+    }
+  };
+    
   return(
  <Box sx={{
         width: 944,
@@ -19,7 +57,7 @@ function SignUpPage () {
     }}>
 
       <h1>Sign up</h1>
-
+      
         <Box sx={{display:'flex',
                   flexDirection:"column",
                   alignItems:'center',
@@ -29,13 +67,24 @@ function SignUpPage () {
                   padding:"20px",
                   borderRadius:"10px"
         }}>
-
           <TextField
             label="E-mail"
             type="email"
             fullWidth
             variant="outlined"
             size="small"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+            <TextField
+            label="Username"
+            type="text"
+            fullWidth
+            variant="outlined"
+            size="small"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
 
           <TextField
@@ -44,6 +93,8 @@ function SignUpPage () {
             fullWidth
             variant="outlined"
             size="small"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           <TextField
@@ -52,9 +103,12 @@ function SignUpPage () {
             fullWidth
             variant="outlined"
             size="small"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
 
           <Button variant="contained"
+                  onClick={handleSubmit}
                   sx={{bgcolor:'#2C2C2C',
                       padding:'10px 110px',
                       borderRadius:'10px',
