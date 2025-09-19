@@ -1,9 +1,40 @@
 import {Box, Button, TextField} from '@mui/material'
+import {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
+import {useLogInMutation} from '../../slices/authApiSlice'
 import './LogInPage.css'
 
 function LogInPage () {
   const navigate = useNavigate()
+
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const [logIn, {isLoading}] = useLogInMutation ()
+  
+
+  const handleSubmit = async () => {
+    try {
+      const result = await logIn({email, password}).unwrap()
+
+      console.log("Logged on the account", result);
+      alert(`✅ Current user: ${result.currentUser || result.message}`);
+      navigate("/"); // redirigir al main menu
+
+    } catch (error) {
+      console.error("There was a problem in the server", error);
+      alert("Could not connect with the server, try again ❌");
+
+      const errorMessage =
+      error?.data?.error || // si tu backend devuelve {error: "..."}
+      error?.error ||       // mensaje genérico de RTK Query
+      "No se pudo conectar con el servidor ❌";
+
+    alert(errorMessage);
+    }
+  };
+
   return(
     <Box sx={{
         width: 944,
@@ -38,6 +69,8 @@ function LogInPage () {
             fullWidth
             variant="outlined"
             size="small"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <TextField
@@ -46,10 +79,12 @@ function LogInPage () {
             fullWidth
             variant="outlined"
             size="small"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           <Button variant="contained"
-                  onClick={() => navigate('/starterselection')}
+                  onClick={handleSubmit}
                   sx={{bgcolor:'#2C2C2C',
                       padding:'10px 110px',
                       borderRadius:'10px',

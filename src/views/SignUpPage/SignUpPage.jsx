@@ -1,6 +1,7 @@
 import {Box, Button, TextField} from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import {useState} from 'react'
+import {useSignUpMutation} from '../../slices/authApiSlice'
 
 function SignUpPage () {
     const navigate = useNavigate()
@@ -10,6 +11,8 @@ function SignUpPage () {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
 
+    const [signUp, {isLoading}] = useSignUpMutation ()
+
     const handleSubmit = async () => {
     if (password !== confirmPassword) {
       alert("Passwords do not match");
@@ -17,27 +20,14 @@ function SignUpPage () {
     }
 
     try {
-      const response = await fetch("http:///localhost:3001/api/users/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, email, password }),
-      });
+      const result = await signUp({username, email, password}).unwrap()
 
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log("Usuario creado:", data);
-        alert("Usuario registrado con éxito ✅");
-        navigate("/"); // redirigir al main menu
-      } else {
-        console.error("Error:", data);
-        alert(`Error: ${data.message || "No se pudo registrar"}`);
-      }
+      console.log("Usuario creado:", result)
+      alert("Usuario registrado con éxito ✅")
+      navigate("/") // redirigir al main menu
     } catch (error) {
-      console.error("Error de conexión:", error);
-      alert("No se pudo conectar con el servidor ❌");
+      console.error("Error en signup:", error)
+      alert(`❌ ${error.data?.error || "No se pudo registrar"}`)
     }
   };
     
