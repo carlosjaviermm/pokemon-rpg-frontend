@@ -1,11 +1,14 @@
 import {Box, Button, TextField} from '@mui/material'
 import {useState, useEffect} from 'react'
+import {useDispatch} from 'react-redux'
+import {setUser} from '../../slices/currentUserSlice'
 import { useNavigate } from 'react-router-dom'
 import {useLogInMutation} from '../../slices/authApiSlice'
 import './LogInPage.css'
 
 function LogInPage () {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
@@ -19,8 +22,9 @@ function LogInPage () {
       const result = await logIn({email, password}).unwrap()
 
       console.log("Logged on the account", result);
-      alert(`✅ Current user: ${result.currentUser || result.message}`);
-      navigate("/"); // redirigir al main menu
+      alert(`✅ Current user: ${result.currentUser.username || result.message}`);
+      dispatch(setUser(result.currentUser))
+      navigate("/starterselection"); // redirigir al main menu
 
     } catch (error) {
       console.error("There was a problem in the server", error);
