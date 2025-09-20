@@ -6,6 +6,7 @@ import SignUpPage from "./views/SignUpPage/SignUpPage.jsx"
 import StarterSelection from './views/StarterSelection/StarterSelection.jsx'
 import MainHub from './views/MainHub/MainHub.jsx'
 import Shop from './views/Shop/Shop.jsx'
+import Level from './views/Level/Level.jsx'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
               <Route path='/starterselection' element={<StarterSelection />} />
               <Route path='/mainhub' element={<MainHub />} />
               <Route path='/shop' element={<Shop />} />
+              <Route path="/level/:id" element={<Level />} />
             </Routes>
           </Router>
     </main>

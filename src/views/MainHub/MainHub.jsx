@@ -2,6 +2,7 @@ import './MainHub.css'
 import {Box, Button} from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import HealthBar from '../../components/HealthBar.jsx'
 import MainHubHeader from './MainHubHeader.jsx'
 import LevelCard from '../../components/LevelCard.jsx'
@@ -9,7 +10,9 @@ import LevelCard from '../../components/LevelCard.jsx'
 function MainHub () {
   const navigate = useNavigate()
   
-    const [levels, setLevels] = useState([])
+  const [levels, setLevels] = useState([])
+
+  const user = useSelector((state) => state.currentUser.user.username)
 
   useEffect(() => {
     const fetchLevels = async () => {
@@ -44,7 +47,7 @@ function MainHub () {
               marginTop:'10px'
     }}>
 
-      <span style={{color:'black'}}>account: tucorreo@mail.com</span>
+      <span style={{color:'black'}}>account: {user}</span>
 
       <Button variant='contained'
               onClick={() => navigate('/')}

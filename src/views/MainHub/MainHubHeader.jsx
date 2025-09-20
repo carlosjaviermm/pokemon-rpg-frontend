@@ -1,10 +1,14 @@
 import { useNavigate } from 'react-router-dom'
 import {Box, Button} from '@mui/material'
+import {useSelector} from 'react-redux'
 
 
 
 function MainHubHeader () {
   const navigate = useNavigate()
+
+  const coins = useSelector((state) => state.currentUser.user.coins)
+
   return (
     <Box component='header'
           sx={{
@@ -30,7 +34,7 @@ function MainHubHeader () {
 
         <img className='coin-icon' alt='coin icon' src='https://cdn-icons-png.flaticon.com/512/188/188926.png' />
 
-        <h3 style={{fontSize:'1.5rem'}}>$20</h3>
+        <h3 style={{fontSize:'1.5rem'}}>${coins}</h3>
     </Box>
   )
 }

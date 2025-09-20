@@ -1,4 +1,6 @@
 import { Box, Button } from '@mui/material';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+
 
 function PotionCards({ potions }) {
   return (
@@ -21,6 +23,7 @@ function PotionCards({ potions }) {
           
           <Button
             variant="contained"
+            startIcon={<MonetizationOnIcon />}
             sx={{ borderRadius: '10px', bgcolor: '#2C2C2C', color: 'white' }}
           >
             Buy

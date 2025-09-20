@@ -1,10 +1,19 @@
 import {Box, Button} from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { useCatchPokemonMutation, useGetStartersQuery } from '../../slices/pokemonApiSlice'
+import { useSelector, useDispatch } from 'react-redux'
+import {setUser} from '../../slices/currentUserSlice'
 import './StarterSelection.css'
 
 function StarterSelection () {
   const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const currentUser = useSelector(state => state.currentUser.user);
+
+  const [catchStarter, {isLoading}] = useCatchPokemonMutation ()
+
+  const { data: startersData } = useGetStartersQuery();
 
   const [showStarters, setShowStarters] = useState (false)
   const [starters, setStarters] = useState ([])
@@ -13,9 +22,42 @@ function StarterSelection () {
     setShowStarters(!showStarters)
   }
 
+  console.log(startersData)
+
+  const handleChooseStarter = async (pokemon) => {
+    try {
+      const res = await catchStarter({ 
+        user_id: currentUser.id, 
+        pokemon_id: pokemon.id 
+      }).unwrap();
+
+      console.log('res', res)
+      // Actualizar Redux con el nuevo equipo (starter)
+      dispatch(setUser({
+        ...currentUser,
+        team: [
+          ...currentUser.team, 
+          { pokemon_id: pokemon.id, name: pokemon.name || 'Starter', health: 100 }
+        ]
+      }));
+
+      // Redirigir al MainHub
+      navigate('/mainhub');
+
+    } catch (error) {
+  console.error('Full error:', error);
+  alert(
+    error?.data?.error || 
+    error?.error || 
+    error?.message || 
+    'Error catching starter')
+    }
+  };
+
   useEffect(() => {
+    if (!startersData || startersData.length === 0) return;
     const fetchStarters = async () => {
-      const pokemon = ['bulbasaur', 'squirtle', 'charmander']
+      const pokemon = ['charmander', 'squirtle', 'bulbasaur']
       try {
         const data = await Promise.all(
           pokemon.map(p =>
@@ -23,10 +65,15 @@ function StarterSelection () {
           )
         )
 
-        const sprites = data.map(p => ({
+      const sprites = data.map((p) => {
+        // Find the starter from your backend that matches the PokéAPI name
+        const dbStarter = startersData.find(s => s.name.toLowerCase() === p.name.toLowerCase());
+        return {
+          id: dbStarter?.id, // Use DB id
           name: p.name,
           img: p.sprites.front_default
-        }))
+        }
+      });
 
         setStarters(sprites)
       } catch (error) {
@@ -35,13 +82,13 @@ function StarterSelection () {
     }
 
     fetchStarters()
-  }, [])
+  }, [startersData])
 
   const startersElements = starters.map((pokemon) => {
     return(<Box sx={{display:'flex', flexDirection:'column', alignItems:'center'}}>
             <h2>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h2>
             <img className="starter-sprites" src={pokemon.img} alt={pokemon.name} key={pokemon.name} />
-            <Button variant="contained" onClick={() => navigate('/mainhub')}>
+            <Button variant="contained" onClick={() => handleChooseStarter(pokemon)}>
               Select
             </Button>
           </Box>)

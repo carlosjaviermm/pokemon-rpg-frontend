@@ -1,8 +1,36 @@
 import {Box, Button, TextField} from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import {useState} from 'react'
+import {useSignUpMutation} from '../../slices/authApiSlice'
 
 function SignUpPage () {
     const navigate = useNavigate()
+
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+
+    const [signUp, {isLoading}] = useSignUpMutation ()
+
+    const handleSubmit = async () => {
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    try {
+      const result = await signUp({username, email, password}).unwrap()
+
+      console.log("Usuario creado:", result)
+      alert("Usuario registrado con éxito ✅")
+      navigate("/") // redirigir al main menu
+    } catch (error) {
+      console.error("Error en signup:", error)
+      alert(`❌ ${error.data?.error || "No se pudo registrar"}`)
+    }
+  };
+    
   return(
  <Box sx={{
         width: 944,
@@ -19,7 +47,7 @@ function SignUpPage () {
     }}>
 
       <h1>Sign up</h1>
-
+      
         <Box sx={{display:'flex',
                   flexDirection:"column",
                   alignItems:'center',
@@ -29,13 +57,24 @@ function SignUpPage () {
                   padding:"20px",
                   borderRadius:"10px"
         }}>
-
           <TextField
             label="E-mail"
             type="email"
             fullWidth
             variant="outlined"
             size="small"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+            <TextField
+            label="Username"
+            type="text"
+            fullWidth
+            variant="outlined"
+            size="small"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
 
           <TextField
@@ -44,6 +83,8 @@ function SignUpPage () {
             fullWidth
             variant="outlined"
             size="small"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           <TextField
@@ -52,9 +93,12 @@ function SignUpPage () {
             fullWidth
             variant="outlined"
             size="small"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
 
           <Button variant="contained"
+                  onClick={handleSubmit}
                   sx={{bgcolor:'#2C2C2C',
                       padding:'10px 110px',
                       borderRadius:'10px',
