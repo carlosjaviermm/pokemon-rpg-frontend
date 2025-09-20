@@ -24,7 +24,12 @@ function LogInPage () {
       console.log("Logged on the account", result);
       alert(`✅ Current user: ${result.currentUser.username || result.message}`);
       dispatch(setUser(result.currentUser))
-      navigate("/starterselection"); // redirigir al main menu
+
+      if(!result.currentUser.team || result.currentUser.team.length === 0){
+        navigate("/starterselection");
+      } else {
+        navigate ('/mainhub')
+      }
 
     } catch (error) {
       console.error("There was a problem in the server", error);
