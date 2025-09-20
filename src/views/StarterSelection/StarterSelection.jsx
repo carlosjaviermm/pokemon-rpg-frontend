@@ -22,19 +22,22 @@ function StarterSelection () {
     setShowStarters(!showStarters)
   }
 
-  const handleChooseStarter = async (pokemonId) => {
+  console.log(startersData)
+
+  const handleChooseStarter = async (pokemon) => {
     try {
       const res = await catchStarter({ 
         user_id: currentUser.id, 
-        pokemon_id: pokemonId 
+        pokemon_id: pokemon.id 
       }).unwrap();
 
+      console.log('res', res)
       // Actualizar Redux con el nuevo equipo (starter)
       dispatch(setUser({
         ...currentUser,
         team: [
           ...currentUser.team, 
-          { pokemon_id: pokemonId, name: res.data?.starterName || 'Starter', health: 100 }
+          { pokemon_id: pokemon.id, name: pokemon.name || 'Starter', health: 100 }
         ]
       }));
 
@@ -81,13 +84,11 @@ function StarterSelection () {
     fetchStarters()
   }, [startersData])
 
-  console.log(starters)
-
   const startersElements = starters.map((pokemon) => {
     return(<Box sx={{display:'flex', flexDirection:'column', alignItems:'center'}}>
             <h2>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h2>
             <img className="starter-sprites" src={pokemon.img} alt={pokemon.name} key={pokemon.name} />
-            <Button variant="contained" onClick={() => handleChooseStarter(pokemon.id)}>
+            <Button variant="contained" onClick={() => handleChooseStarter(pokemon)}>
               Select
             </Button>
           </Box>)
