@@ -22,8 +22,6 @@ function StarterSelection () {
     setShowStarters(!showStarters)
   }
 
-  console.log(startersData)
-
   const handleChooseStarter = async (pokemon) => {
     try {
       const res = await catchStarter({ 
