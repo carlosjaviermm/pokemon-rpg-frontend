@@ -21,7 +21,6 @@ function LogInPage () {
     try {
       const result = await logIn({email, password}).unwrap()
 
-      console.log("Logged on the account", result);
       alert(`✅ Current user: ${result.currentUser.username || result.message}`);
       dispatch(setUser(result.currentUser))
 
